@@ -1,0 +1,15 @@
+{
+  "name": "com.lurkingninja.player-loop",
+  "displayName": "Playerloop",
+  "version": "1.0.0",
+  "unity": "2021.3",
+  "description": "Helper to utilize Unity's custom player-loop.",
+  "documentationUrl": "https://lurking-ninja.com/",
+  "author": {
+    "name": "Lurking Ninja",
+    "email": "dev@lurking-ninja.com",
+    "url": "https://lurking-ninja.com/"
+  },
+  "unityRelease": "14f1",
+  "type": "library"
+}

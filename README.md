@@ -1,7 +1,7 @@
 # com.lurking-ninja.player-loop
 A simple helper package to use Unity's custom player loop. The usage is simple:
 ```csharp
-using LurkingNinja.PlayerLoop;
+using LurkingNinja.PlayerloopManagement;
 using UnityEngine;
 
 public class TestPlayerLoop : IUpdate
@@ -28,7 +28,7 @@ You can always use the following type of player-loop entries:
 The corresponding interface's name is the same but starts with an "I" as standard, and the callback method starts with the "On" prefix.
 If you want to register the same class into multiple callbacks use the standard typecasting:
 ```csharp
-using LurkingNinja.PlayerLoop;
+using LurkingNinja.PlayerloopManagement;
 using UnityEngine;
 
 public class TestPlayerLoop : IUpdate, IPostLateUpdate

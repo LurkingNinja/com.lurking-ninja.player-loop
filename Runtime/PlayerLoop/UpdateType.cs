@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityPlayerLoop = UnityEngine.PlayerLoop;
 
-namespace LurkingNinja.PlayerLoop
+namespace LurkingNinja.PlayerloopManagement
 {
 	public enum UpdateType
 	{

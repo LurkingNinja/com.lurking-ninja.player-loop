@@ -1,6 +1,6 @@
 {
     "name": "com.lurking-ninja.player-loop.runtime",
-    "rootNamespace": "LurkingNinja",
+    "rootNamespace": "LurkingNinja.PlayerloopManagement",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

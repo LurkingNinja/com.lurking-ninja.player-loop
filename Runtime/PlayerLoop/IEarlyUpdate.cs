@@ -1,4 +1,4 @@
-namespace LurkingNinja.PlayerLoop
+namespace LurkingNinja.PlayerloopManagement
 {
     public interface IEarlyUpdate
     {

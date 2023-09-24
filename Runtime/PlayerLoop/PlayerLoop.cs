@@ -1,12 +1,12 @@
-using System;
 #if UNITY_EDITOR
-using System.Collections.Generic;
-#endif
 using UnityEditor;
+#endif
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using LowLevelPlayerLoop = UnityEngine.LowLevel;
 
-namespace LurkingNinja.PlayerLoop
+namespace LurkingNinja.PlayerloopManagement
 {
     public static class PlayerLoop
     {
@@ -14,12 +14,12 @@ namespace LurkingNinja.PlayerLoop
 		
 #if UNITY_EDITOR
 #region EditorCallbackStorage
-		private static readonly List<IEarlyUpdate> EarlyUpdates = new List<IEarlyUpdate>();
-		private static readonly List<IFixedUpdate> FixedUpdates = new List<IFixedUpdate>();
-		private static readonly List<IPreUpdate> PreUpdates = new List<IPreUpdate>();
-		private static readonly List<IUpdate> Updates = new List<IUpdate>();
-		private static readonly List<IPreLateUpdate> PreLateUpdates = new List<IPreLateUpdate>();
-		private static readonly List<IPostLateUpdate> PostLateUpdates = new List<IPostLateUpdate>();
+		private static readonly List<IEarlyUpdate> _earlyUpdates = new List<IEarlyUpdate>();
+		private static readonly List<IFixedUpdate> _fixedUpdates = new List<IFixedUpdate>();
+		private static readonly List<IPreUpdate> _preUpdates = new List<IPreUpdate>();
+		private static readonly List<IUpdate> _updates = new List<IUpdate>();
+		private static readonly List<IPreLateUpdate> _preLateUpdates = new List<IPreLateUpdate>();
+		private static readonly List<IPostLateUpdate> _postLateUpdates = new List<IPostLateUpdate>();
 #endregion
 #endif
 		
@@ -68,24 +68,24 @@ namespace LurkingNinja.PlayerLoop
 		private static void UnregisterAll(ref LowLevelPlayerLoop.PlayerLoopSystem defPls)
 		{
 			defPls.subSystemList[UpdateType.Update.ToIndex()].updateDelegate -= FrameCounter;
-			foreach(var earlyUpdate in EarlyUpdates) defPls.subSystemList[UpdateType.EarlyUpdate.ToIndex()]
+			foreach(var earlyUpdate in _earlyUpdates) defPls.subSystemList[UpdateType.EarlyUpdate.ToIndex()]
 					.updateDelegate -= earlyUpdate.OnEarlyUpdate; 
-			foreach(var fixedUpdate in FixedUpdates) defPls.subSystemList[UpdateType.FixedUpdate.ToIndex()]
+			foreach(var fixedUpdate in _fixedUpdates) defPls.subSystemList[UpdateType.FixedUpdate.ToIndex()]
 					.updateDelegate -= fixedUpdate.OnFixedUpdate; 
-			foreach(var preUpdate in PreUpdates) defPls.subSystemList[UpdateType.PreUpdate.ToIndex()]
+			foreach(var preUpdate in _preUpdates) defPls.subSystemList[UpdateType.PreUpdate.ToIndex()]
 					.updateDelegate -= preUpdate.OnPreUpdate; 
-			foreach(var update in Updates) defPls.subSystemList[UpdateType.Update.ToIndex()]
+			foreach(var update in _updates) defPls.subSystemList[UpdateType.Update.ToIndex()]
 					.updateDelegate -= update.OnUpdate; 
-			foreach(var preLateUpdate in PreLateUpdates) defPls.subSystemList[UpdateType.PreLateUpdate.ToIndex()]
+			foreach(var preLateUpdate in _preLateUpdates) defPls.subSystemList[UpdateType.PreLateUpdate.ToIndex()]
 					.updateDelegate -= preLateUpdate.OnPreLateUpdate; 
-			foreach(var postLateUpdate in PostLateUpdates) defPls.subSystemList[UpdateType.PostLateUpdate.ToIndex()]
+			foreach(var postLateUpdate in _postLateUpdates) defPls.subSystemList[UpdateType.PostLateUpdate.ToIndex()]
 					.updateDelegate -= postLateUpdate.OnPostLateUpdate; 
-			EarlyUpdates.Clear();
-			FixedUpdates.Clear();
-			PreUpdates.Clear();
-			Updates.Clear();
-			PreLateUpdates.Clear();
-			PostLateUpdates.Clear();
+			_earlyUpdates.Clear();
+			_fixedUpdates.Clear();
+			_preUpdates.Clear();
+			_updates.Clear();
+			_preLateUpdates.Clear();
+			_postLateUpdates.Clear();
 		}
 #endregion
 #endif
@@ -96,7 +96,7 @@ namespace LurkingNinja.PlayerLoop
 		public static void AddListener(IEarlyUpdate client)
 		{
 #if UNITY_EDITOR
-			EarlyUpdates.Add(client);
+			_earlyUpdates.Add(client);
 #endif
 			var defPls = LowLevelPlayerLoop.PlayerLoop.GetCurrentPlayerLoop();
 			defPls.subSystemList[UpdateType.EarlyUpdate.ToIndex()].updateDelegate += client.OnEarlyUpdate;
@@ -106,7 +106,7 @@ namespace LurkingNinja.PlayerLoop
 		public static void AddListener(IFixedUpdate client)
 		{
 #if UNITY_EDITOR
-			FixedUpdates.Add(client);
+			_fixedUpdates.Add(client);
 #endif
 			var defPls = LowLevelPlayerLoop.PlayerLoop.GetCurrentPlayerLoop();
 			defPls.subSystemList[UpdateType.FixedUpdate.ToIndex()].updateDelegate += client.OnFixedUpdate;
@@ -116,7 +116,7 @@ namespace LurkingNinja.PlayerLoop
 		public static void AddListener(IPreUpdate client)
 		{
 #if UNITY_EDITOR
-			PreUpdates.Add(client);
+			_preUpdates.Add(client);
 #endif
 			var defPls = LowLevelPlayerLoop.PlayerLoop.GetCurrentPlayerLoop();
 			defPls.subSystemList[UpdateType.PreUpdate.ToIndex()].updateDelegate += client.OnPreUpdate;
@@ -126,7 +126,7 @@ namespace LurkingNinja.PlayerLoop
 		public static void AddListener(IUpdate client)
 		{
 #if UNITY_EDITOR
-			Updates.Add(client);
+			_updates.Add(client);
 #endif
 			var defPls = LowLevelPlayerLoop.PlayerLoop.GetCurrentPlayerLoop();
 			defPls.subSystemList[UpdateType.Update.ToIndex()].updateDelegate += client.OnUpdate;
@@ -136,7 +136,7 @@ namespace LurkingNinja.PlayerLoop
 		public static void AddListener(IPreLateUpdate client)
 		{
 #if UNITY_EDITOR
-			PreLateUpdates.Add(client);
+			_preLateUpdates.Add(client);
 #endif
 			var defPls = LowLevelPlayerLoop.PlayerLoop.GetCurrentPlayerLoop();
 			defPls.subSystemList[UpdateType.PreLateUpdate.ToIndex()].updateDelegate += client.OnPreLateUpdate;
@@ -146,7 +146,7 @@ namespace LurkingNinja.PlayerLoop
 		public static void AddListener(IPostLateUpdate client)
 		{
 #if UNITY_EDITOR
-			PostLateUpdates.Add(client);
+			_postLateUpdates.Add(client);
 #endif
 			var defPls = LowLevelPlayerLoop.PlayerLoop.GetCurrentPlayerLoop();
 			defPls.subSystemList[UpdateType.PostLateUpdate.ToIndex()].updateDelegate += client.OnPostLateUpdate;
@@ -161,7 +161,7 @@ namespace LurkingNinja.PlayerLoop
 			defPls.subSystemList[UpdateType.EarlyUpdate.ToIndex()].updateDelegate -= client.OnEarlyUpdate;
 			LowLevelPlayerLoop.PlayerLoop.SetPlayerLoop(defPls);
 #if UNITY_EDITOR
-			EarlyUpdates.Remove(client);
+			_earlyUpdates.Remove(client);
 #endif
 		}
 
@@ -171,7 +171,7 @@ namespace LurkingNinja.PlayerLoop
 			defPls.subSystemList[UpdateType.FixedUpdate.ToIndex()].updateDelegate -= client.OnFixedUpdate;
 			LowLevelPlayerLoop.PlayerLoop.SetPlayerLoop(defPls);
 #if UNITY_EDITOR
-			FixedUpdates.Remove(client);
+			_fixedUpdates.Remove(client);
 #endif
 		}
 
@@ -181,7 +181,7 @@ namespace LurkingNinja.PlayerLoop
 			defPls.subSystemList[UpdateType.PreUpdate.ToIndex()].updateDelegate -= client.OnPreUpdate;
 			LowLevelPlayerLoop.PlayerLoop.SetPlayerLoop(defPls);
 #if UNITY_EDITOR
-			PreUpdates.Remove(client);
+			_preUpdates.Remove(client);
 #endif
 		}
 
@@ -191,7 +191,7 @@ namespace LurkingNinja.PlayerLoop
 			defPls.subSystemList[UpdateType.Update.ToIndex()].updateDelegate -= client.OnUpdate;
 			LowLevelPlayerLoop.PlayerLoop.SetPlayerLoop(defPls);
 #if UNITY_EDITOR
-			Updates.Remove(client);
+			_updates.Remove(client);
 #endif
 		}
 
@@ -201,7 +201,7 @@ namespace LurkingNinja.PlayerLoop
 			defPls.subSystemList[UpdateType.PreLateUpdate.ToIndex()].updateDelegate -= client.OnPreLateUpdate;
 			LowLevelPlayerLoop.PlayerLoop.SetPlayerLoop(defPls);
 #if UNITY_EDITOR
-			PreLateUpdates.Remove(client);
+			_preLateUpdates.Remove(client);
 #endif
 		}
 
@@ -211,7 +211,7 @@ namespace LurkingNinja.PlayerLoop
 			defPls.subSystemList[UpdateType.PostLateUpdate.ToIndex()].updateDelegate -= client.OnPostLateUpdate;
 			LowLevelPlayerLoop.PlayerLoop.SetPlayerLoop(defPls);
 #if UNITY_EDITOR
-			PostLateUpdates.Remove(client);
+			_postLateUpdates.Remove(client);
 #endif
 		}
 #endregion

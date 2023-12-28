@@ -17,7 +17,7 @@ namespace LurkingNinja.PlayerloopManagement
 
 	internal static class UpdateTypeExtension
 	{
-		private static readonly Dictionary<UpdateType, Type> Updates = new()
+		private static readonly Dictionary<UpdateType, Type> _updates = new()
 		{
 				{UpdateType.EarlyUpdate, typeof(UnityPlayerLoop.EarlyUpdate)}, 
 				{UpdateType.FixedUpdate, typeof(UnityPlayerLoop.FixedUpdate)},
@@ -27,7 +27,7 @@ namespace LurkingNinja.PlayerloopManagement
 				{UpdateType.PostLateUpdate, typeof(UnityPlayerLoop.PostLateUpdate)}
 		};
 
-		public static Type ToType(this UpdateType plt) => Updates[plt];
+		public static Type ToType(this UpdateType plt) => _updates[plt];
 		public static int ToIndex(this UpdateType plt) => (int)plt;
 		public static UpdateType FromIndex(int index) => (UpdateType)index;
 	}

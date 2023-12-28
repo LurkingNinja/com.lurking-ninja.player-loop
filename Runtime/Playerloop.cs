@@ -8,19 +8,17 @@ using LowLevelPlayerLoop = UnityEngine.LowLevel;
 
 namespace LurkingNinja.PlayerloopManagement
 {
-    public static class PlayerLoop
+    public static class Playerloop
     {
 		public static ulong Frame { get; private set; }
 		
 #if UNITY_EDITOR
-#region EditorCallbackStorage
-		private static readonly List<IEarlyUpdate> _earlyUpdates = new List<IEarlyUpdate>();
-		private static readonly List<IFixedUpdate> _fixedUpdates = new List<IFixedUpdate>();
-		private static readonly List<IPreUpdate> _preUpdates = new List<IPreUpdate>();
-		private static readonly List<IUpdate> _updates = new List<IUpdate>();
-		private static readonly List<IPreLateUpdate> _preLateUpdates = new List<IPreLateUpdate>();
-		private static readonly List<IPostLateUpdate> _postLateUpdates = new List<IPostLateUpdate>();
-#endregion
+		private static readonly List<IEarlyUpdate> _earlyUpdates = new();
+		private static readonly List<IFixedUpdate> _fixedUpdates = new();
+		private static readonly List<IPreUpdate> _preUpdates = new();
+		private static readonly List<IUpdate> _updates = new();
+		private static readonly List<IPreLateUpdate> _preLateUpdates = new();
+		private static readonly List<IPostLateUpdate> _postLateUpdates = new();
 #endif
 		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -39,7 +37,6 @@ namespace LurkingNinja.PlayerloopManagement
 		}
 
 #if UNITY_EDITOR
-#region EditorHandling
 		private static void CheckIntegrity(LowLevelPlayerLoop.PlayerLoopSystem defPls)
 		{
 			for(var uType = UpdateType.EarlyUpdate; uType <= UpdateType.PostLateUpdate; uType++)
@@ -87,12 +84,10 @@ namespace LurkingNinja.PlayerloopManagement
 			_preLateUpdates.Clear();
 			_postLateUpdates.Clear();
 		}
-#endregion
 #endif
 	
 		private static void FrameCounter() => Frame++;
 		
-#region AddListeners
 		public static void AddListener(IEarlyUpdate client)
 		{
 #if UNITY_EDITOR
@@ -152,9 +147,7 @@ namespace LurkingNinja.PlayerloopManagement
 			defPls.subSystemList[UpdateType.PostLateUpdate.ToIndex()].updateDelegate += client.OnPostLateUpdate;
 			LowLevelPlayerLoop.PlayerLoop.SetPlayerLoop(defPls);
 		}
-#endregion
 
-#region RemoveListeners
 		public static void RemoveListener(IEarlyUpdate client)
 		{
 			var defPls = LowLevelPlayerLoop.PlayerLoop.GetCurrentPlayerLoop();
@@ -214,6 +207,5 @@ namespace LurkingNinja.PlayerloopManagement
 			_postLateUpdates.Remove(client);
 #endif
 		}
-#endregion
 	}
 }

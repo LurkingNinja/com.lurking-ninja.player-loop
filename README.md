@@ -4,13 +4,13 @@ A simple helper package to use Unity's custom player loop. The usage is simple:
 using LurkingNinja.PlayerloopManagement;
 using UnityEngine;
 
-public class TestPlayerLoop : IUpdate
+public class TestPlayerloop : IUpdate
 {
     [RuntimeInitializeOnLoadMethod]
     private static void Awake()
     {
-        var testPlayerLoop = new TestPlayerLoop();
-        PlayerLoop.AddListener(testPlayerLoop);
+        var testPlayerloop = new TestPlayerloop();
+        Playerloop.AddListener(testPlayerloop);
     }
 
     public void OnUpdate() => Debug.Log("Update");
@@ -31,14 +31,14 @@ If you want to register the same class into multiple callbacks use the standard 
 using LurkingNinja.PlayerloopManagement;
 using UnityEngine;
 
-public class TestPlayerLoop : IUpdate, IPostLateUpdate
+public class TestPlayerloop : IUpdate, IPostLateUpdate
 {
     [RuntimeInitializeOnLoadMethod]
     private static void Awake()
     {
-        var testPlayerLoop = new TestPlayerLoop();
-        PlayerLoop.AddListener((IUpdate)testPlayerLoop);
-        PlayerLoop.AddListener((IPostLateUpdate)testPlayerLoop);
+        var testPlayerloop = new TestPlayerloop();
+        Playerloop.AddListener((IUpdate)testPlayerloop);
+        Playerloop.AddListener((IPostLateUpdate)testPlayerloop);
     }
 
     public void OnUpdate() => Debug.Log("Update");

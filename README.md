@@ -1,11 +1,17 @@
 # com.lurking-ninja.player-loop
 A simple helper package to use Unity's custom player loop. The usage is simple:
 ## Installation
-Use the Package Manager's ```+/Install package from git URL``` function.
-The URL you should use is this: 
+You can choose manually installing the package or from GitHub source
+### Using direct git source code
+Use the Package Manager's ```+/Add package from git URL``` function.
+The URL you should use is this:
 ```
 https://github.com/LurkingNinja/com.lurking-ninja.player-loop.git?path=Packages/com.lurking-ninja.player-loop
 ```
+### Manual install
+1. Download the latest ```.zip``` package from the [Release](https://github.com/LurkingNinja/com.lurking-ninja.player-loop/releases) section.
+2. Unpack the ```.zip``` file into your project's ```Packages``` folder.
+3. Open your project and check if it is imported properly.
 ## Usage
 ```csharp
 using LurkingNinja.PlayerloopManagement;

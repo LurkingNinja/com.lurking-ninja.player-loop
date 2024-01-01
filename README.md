@@ -1,5 +1,12 @@
 # com.lurking-ninja.player-loop
 A simple helper package to use Unity's custom player loop. The usage is simple:
+## Installation
+Use the Package Manager's ```+/Add package by GIT Url``` function.
+The URL you should use is this: 
+```
+https://github.com/LurkingNinja/com.lurking-ninja.player-loop?path=Packages/com.lurking-ninja.player-loop
+```
+## Usage
 ```csharp
 using LurkingNinja.PlayerloopManagement;
 using UnityEngine;
@@ -16,7 +23,6 @@ public class TestPlayerloop : IUpdate
     public void OnUpdate() => Debug.Log("Update");
 }
 ```
-
 You can always use the following type of player-loop entries: 
 - EarlyUpdate 
 - FixedUpdate
@@ -46,5 +52,4 @@ public class TestPlayerloop : IUpdate, IPostLateUpdate
     public void OnPostLateUpdate() => Debug.Log("PostLateUpdate");
 }
 ```
-
 It is possible to keep MonoBehaviour, the Awake or Start method and just register for Update and the rest of the repeated callbacks.

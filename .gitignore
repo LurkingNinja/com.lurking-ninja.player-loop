@@ -60,6 +60,12 @@ crashlytics-build.properties
 .cache
 .unsaved
 
+[Ll]ibrary
+[Ll]ogs
+[Oo]bj
+[Tt]emp
+[Uu]ser[Ss]ettings
+
 CHANGELOG.md.meta
 LICENSE.meta
 README.md.meta

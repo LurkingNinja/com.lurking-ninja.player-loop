@@ -4,7 +4,7 @@ A simple helper package to use Unity's custom player loop. The usage is simple:
 Use the Package Manager's ```+/Add package by GIT Url``` function.
 The URL you should use is this: 
 ```
-https://github.com/LurkingNinja/com.lurking-ninja.player-loop?path=Packages/com.lurking-ninja.player-loop
+https://github.com/LurkingNinja/com.lurking-ninja.player-loop.git?path=Packages/com.lurking-ninja.player-loop
 ```
 ## Usage
 ```csharp

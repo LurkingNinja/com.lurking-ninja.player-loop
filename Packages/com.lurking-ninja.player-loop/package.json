@@ -4,7 +4,10 @@
   "version": "1.0.1",
   "unity": "2021.3",
   "description": "Helper to utilize Unity's custom player-loop.",
-  "documentationUrl": "https://lurking-ninja.com/",
+  "documentationUrl": "https://github.com/LurkingNinja/com.lurking-ninja.player-loop",
+  "changelogUrl": "https://github.com/LurkingNinja/com.lurking-ninja.player-loop/blob/main/CHANGELOG.md",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/LurkingNinja/com.lurking-ninja.player-loop/blob/main/LICENSE",
   "author": {
     "name": "Lurking Ninja",
     "email": "dev@lurking-ninja.com",
